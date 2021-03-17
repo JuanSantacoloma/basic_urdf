@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <!-- Cargar modelo -->
+    <arg 
+        name="model" 
+        default="$(find basic_urdf)/urdf/view_model.urdf"
+    />
+
+    <!-- Parse modelo -->
+    
+    <param 
+        name="robot_description" 
+        command="$(find xacro)/xacro $(arg model)"
+    />
+
+    <!-- publicando states -->
+    <node 
+        pkg="robot_state_publisher" 
+        type="robot_state_publisher" 
+        name="rob_pub">
+    </node>
+
+    <node 
+        pkg="joint_state_publisher_gui" 
+        type="joint_state_publisher_gui" 
+        name="joint_state">
+        
+    </node>
+
+    <!-- rviz -->
+
+    <node 
+        pkg="rviz" 
+        type="rviz" 
+        name="rviz">
+    </node>
+
+</launch>
